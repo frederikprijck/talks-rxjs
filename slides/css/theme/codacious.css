@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700,600);
+
+.reveal, .reveal h1, .reveal h2, .reveal p {
+  font-family: "Open Sans", sans-serif;
+  text-transform: none;
+}
+
+.reveal h1, .reveal h2 {
+    font-weight: 800;
+}
+
+.reveal .blur {
+    opacity: 0.2;
+}
+
+.reveal pre code  {
+    background-color: #eee;
+    padding: 25px;
+    color: #555;
+}
+
+.hljs-keyword, .hljs-selector-tag, .hljs-tag, .hljs-title, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-section, .hljs-type {
+    /*color: #2a76dd;*/
+    color: #555;
+}
+
+.hljs-literal, .hljs-built_in {
+    color: #555;
+}
