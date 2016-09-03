@@ -183,6 +183,63 @@ observable.subscribe(x => console.log(x));
 				</section>
 
 				<section>
+					<h2>Streaming</h2>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
+    observer.next("Message 2");
+    observer.next("Message 3");  
+  }, 1000);
+
+  setTimeout(() => {
+    </span>observer.next("Message 1");<span class="blur">
+  }, 400);
+});
+
+observable.subscribe(x => console.log(x));</span>
+    						</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Streaming</h2>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
+    </span>observer.next("Message 2");<span class="blur">
+    observer.next("Message 3");  
+  }, 1000);
+
+  setTimeout(() => {
+    observer.next("Message 1");
+  }, 400);
+});
+
+observable.subscribe(x => console.log(x));</span>
+    						</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Streaming</h2>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
+    observer.next("Message 2");
+    </span>observer.next("Message 3");<span class="blur">
+  }, 1000);
+
+  setTimeout(() => {
+    observer.next("Message 1");
+  }, 400);
+});
+
+observable.subscribe(x => console.log(x));</span>
+    						</code></pre>
+
+				</section>
+
+				<section>
 					<h2>Event streams</h2>
 					<pre class="fragment"><code data-trim data-noescape>
 let createKeyUpObservable = (element) => {
@@ -275,6 +332,7 @@ let observable = new Observable(observer => {
   complete: () => console.log("Completed")
 };
 
+//observable.subscribe(x => console.log(x));
 observable.subscribe(observer);</span>
     						</code></pre>
 
@@ -298,6 +356,7 @@ let observer = {
   complete: () => console.log("Completed")
 };
 
+//observable.subscribe(x => console.log(x));
 observable.subscribe(observer);</span>
     						</code></pre>
 
@@ -321,23 +380,8 @@ let observer = {
   <strong>complete</strong>: () => console.log("Completed")
 };
 
+//observable.subscribe(x => console.log(x));
 observable.subscribe(observer);
-    						</code></pre>
-
-				</section>
-
-				<section>
-					<h2>Multiple observers</h2>
-					<pre class="fragment"><code data-trim data-noescape>
-let observable = new Observable(...);
-
-observable.<strong>subscribe</strong>(x => console.log(`Any subscriber: ${x}`));
-observable.<strong>subscribe</strong>(x => console.log(`Another subscriber: ${x}`));
-observable.<strong>subscribe</strong>({
-  next: x => console.log(x),
-  error: x => console.log(`Error: ${x}`),
-  complete: () => console.log("Completed")
-});
     						</code></pre>
 
 				</section>
@@ -351,7 +395,7 @@ observable.<strong>subscribe</strong>({
 				</section>
 				<section>
 					<h2>Operators</h2>
-					<p class="fragment"><strong>static</strong> and <strong>instance</strong> operators.
+					<p class="fragment">Methods on/for the observable.</p>
 				</section>
 
 				<section>
@@ -395,6 +439,11 @@ let observable =</span> Rx.Observable.from([1, 2, 3]);
     						</code></pre>
 
 					
+				</section>
+
+				<section>
+					<h2>Instance operators</h2>
+					<p class="fragment">Methods on the Observable.prototype</p>
 				</section>
 
 				<section>
@@ -630,6 +679,7 @@ let subscription = observable
 
 				<section>
 					<h1>Thanks! :-)</h1>
+					<p>Slides & demos @ <a href="https://github.com/frederikprijck/talks-rxjs">https://github.com/frederikprijck/talks-rxjs</a></p>
 				</section>
 
 			</div>
