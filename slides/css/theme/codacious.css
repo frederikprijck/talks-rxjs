@@ -13,6 +13,10 @@
     opacity: 0.2;
 }
 
+.reveal section img {
+    border: none;
+}
+
 .reveal pre code  {
     background-color: #eee;
     padding: 25px;

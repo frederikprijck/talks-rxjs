@@ -342,10 +342,10 @@ observable.subscribe(observer);</span>
 					<h2>next, complete and error</h2>
 					<pre><code data-trim data-noescape>
 <span class="blur">let observable = new Observable(observer => {
-   setTimeout(() => {
+   setTimeout(() => {</span>
     observer.next("Message 1");
     observer.next("Message 2");
-    // observer.complete();</span> 
+    <span class="blur">// observer.complete();</span> 
     observer.<strong>error</strong>("something went wrong");
   <span class="blur">}, 1000);
 });
@@ -680,6 +680,7 @@ let subscription = observable
 				<section>
 					<h1>Thanks! :-)</h1>
 					<p>Slides & demos @ <a href="https://github.com/frederikprijck/talks-rxjs">https://github.com/frederikprijck/talks-rxjs</a></p>
+					
 				</section>
 
 			</div>
