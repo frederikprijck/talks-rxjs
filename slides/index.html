@@ -44,7 +44,7 @@
 					<p class="fragment">Promises</p>
 				</section>
 				<section>
-					<h2>Promises</h2>
+					<h2>Promises (ES6)</h2>
 					     <pre class="fragment"><code data-trim data-noescape>
 let promise = new Promise((resolve, reject) => {
   setTimeout(() => {
@@ -116,11 +116,11 @@ observable.<strong>subscribe</strong>(x => console.log(x));
 				</section>
 
 				<section>
-					<h2>Observables can replace Promises</h2>
+					<h2>Observables are alot like Promises</h2>
 				</section>
 
 				<section>
-					<h2>Benefits of Observables</h2>
+					<h2>Observables are Promises on steroids</h2>
 				</section>
 
 				<section>
@@ -318,7 +318,7 @@ observable.subscribe(x => console.log(x));
 					<h2>next, complete and error</h2>
 					<pre class="fragment"><code data-trim data-noescape>
 let observable = new Observable(observer => {
-   setTimeout(() => {
+  setTimeout(() => {
     observer.<strong>next</strong>("Message 1");
     observer.<strong>next</strong>("Message 2");
     observer.<strong>complete</strong>(); 
@@ -341,15 +341,15 @@ observable.subscribe(observer);</span>
 				<section>
 					<h2>next, complete and error</h2>
 					<pre><code data-trim data-noescape>
-<span class="blur">let observable = new Observable(observer => {
-   setTimeout(() => {</span>
+let observable = new Observable(observer => {
+  setTimeout(() => {
     observer.next("Message 1");
     observer.next("Message 2");
     <span class="blur">// observer.complete();</span> 
     observer.<strong>error</strong>("something went wrong");
-  <span class="blur">}, 1000);
+  }, 1000);
 });
-
+<span class="blur"> 
 let observer = {
   next: x => console.log(x),
   error: x => console.log(`Error: ${x}`),
@@ -387,6 +387,10 @@ observable.subscribe(observer);
 				</section>
 
 				<section>
+					<h2>A Promise is an Observable who emits a single item and completes</h2>
+					<p>(or fails without emitting any item)</p>
+				</section>
+				<section>
 					<h2>Hot & Cold Observables</h2>
 				</section>
 
@@ -396,6 +400,7 @@ observable.subscribe(observer);
 				<section>
 					<h2>Operators</h2>
 					<p class="fragment">Methods on/for the observable.</p>
+					<p class="fragment">An operator return a <strong>new</strong> observable.</p>
 				</section>
 
 				<section>
@@ -520,6 +525,7 @@ let subscription = observable
     						</code></pre>
 				</section>
 
+				
 				<section>
 					<h2>Instance operators</h2>
 					<p>Map</p>
@@ -528,12 +534,25 @@ let subscription = observable
 
 				<section>
 					<pre><code data-trim data-noescape>
+import { Observable } from 'rxjs/observable';
+let observable = new Observable(observer => {
+   observer.next('Message 1');
+});<span class="blur">
+let subscription = observable
+  .<strong>map</strong>(x => { return { message: x }; })
+  .subscribe(x => console.log(x.message));</span>
+    						</code></pre>
+					
+				</section>
+
+				<section>
+					<pre><code data-trim data-noescape>
 <span class="blur">import { Observable } from 'rxjs/observable';
 let observable = new Observable(observer => {
    observer.next('Message 1');
-});
+});</span>
 let subscription = observable
-  </span>.<strong>map</strong>(x => { return { message: x }; })
+  .<strong>map</strong>(x => { return { message: x }; })
   <span class="blur">.subscribe(x => console.log(x.message));</span>
     						</code></pre>
 					
@@ -544,9 +563,9 @@ let subscription = observable
 <span class="blur">import { Observable } from 'rxjs/observable';
 let observable = new Observable(observer => {
    observer.next('Message 1');
-});
+});</span>
 let subscription = observable
-  .map(x => { return { message: x }; })</span>
+  <span class="blur">.map(x => { return { message: x }; })</span>
   .subscribe(x => console.log(x.<strong>message</strong>));
     						</code></pre>
 					
@@ -560,7 +579,7 @@ let subscription = observable
 
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">let observable = </span>Rx.Observable.fromArray([1, 2, 5, 1, 2, 2, 6]);
+<span class="blur">let observable = </span>Rx.Observable.from([1, 2, 5, 1, 2, 2, 6]);
 <span class="blur">let subscription = observable
   .distinct()
   .subscribe(x => console.log(x)); // Logs: 1, 2, 5, 6</span>
@@ -570,7 +589,7 @@ let subscription = observable
 
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 2, 2, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 2, 2, 6]);
 let subscription = observable</span>
   .<strong>distinct</strong>()
   <span class="blur">.subscribe(x => console.log(x)); </span>// Logs: 1, 2, 5, 6
@@ -579,7 +598,7 @@ let subscription = observable</span>
 				</section>
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 2, 2, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 2, 2, 6]);
 let subscription = observable</span>
   .<strong>distinctUntilChanged</strong>()
   <span class="blur">.subscribe(x => console.log(x)); </span>// Logs: 1, 2, 5, <strong>1</strong>, <strong>2</strong>, 6
@@ -588,7 +607,7 @@ let subscription = observable</span>
 				</section>
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 2, 2, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 2, 2, 6]);
 let subscription = observable</span>
   .<strong>distinctUntilChanged</strong>()
   <span class="blur">.subscribe(x => console.log(x)); </span>// Logs: <span class="blur">1, 2, 5,</span> <strong>1</strong>, <strong>2</strong>, <span class="blur">6</span>
@@ -600,7 +619,7 @@ let subscription = observable</span>
 					<h2>Instance operators</h2>
 					<p>Filters</p>
 						<pre class="fragment"><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 12, 4, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
 let subscription = observable</span>
   .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6
   <span class="blur">.skip(1) // Limits the observable to: 12, 4, 6
@@ -614,7 +633,7 @@ let subscription = observable</span>
 					<h2>Instance operators</h2>
 					<p>Filters</p>
 						<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 12, 4, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
 let subscription = observable
   .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6</span>
   .skip(1) // Limits the observable to: 12, 4, 6
@@ -628,7 +647,7 @@ let subscription = observable
 					<h2>Instance operators</h2>
 					<p>Filters</p>
 						<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 12, 4, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
 let subscription = observable
   .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6
   .skip(1) // Limits the observable to: 12, 4, 6</span>
@@ -642,7 +661,7 @@ let subscription = observable
 					<h2>Instance operators</h2>
 					<p>Filters</p>
 						<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 12, 4, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
 let subscription = observable
   .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6
   .skip(1) // Limits the observable to: 12, 4, 6
@@ -656,7 +675,7 @@ let subscription = observable
 					<h2>Instance operators</h2>
 					<p>Filters</p>
 						<pre><code data-trim data-noescape>
-<span class="blur">let observable = Rx.Observable.fromArray([1, 2, 5, 1, 12, 4, 6]);
+<span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
 let subscription = observable
   .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6
   .skip(1) // Limits the observable to: 12, 4, 6
