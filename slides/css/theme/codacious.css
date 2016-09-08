@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700,600);
 
-.reveal, .reveal h1, .reveal h2, .reveal p {
+.reveal, .reveal h1, .reveal h2, .reveal h3, .reveal p {
   font-family: "Open Sans", sans-serif;
   text-transform: none;
 }

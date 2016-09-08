@@ -51,19 +51,43 @@ let promise = new Promise((resolve, reject) => {
     <strong>resolve</strong>('Promise: hello world');
   }, 1000);
 });
-<span class="blur">promise.then(x => console.log(x));</span>
+<span class="blur">promise.then(x => console.log(x), error => console.log(error));</span>
     						</code></pre>
 				</section>
 
 				<section>
-					<h2>Promises</h2>
+					<h2>Promises (ES6)</h2>
 					     <pre><code data-trim data-noescape>
 <span class="blur">let promise = new Promise((resolve, reject) => {
   setTimeout(() => {
     <strong>resolve</strong>('Promise: hello world');
   }, 1000);
 });</span>
-promise.<strong>then</strong>(x => console.log(x));
+promise.<strong>then</strong>(<strong>x => console.log(x)</strong>, error => console.log(error));
+    						</code></pre>
+				</section>
+
+				<section>
+					<h2>Promises (ES6)</h2>
+					     <pre><code data-trim data-noescape>
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    <strong>reject</strong>('Promise: error');
+  }, 1000);
+});
+<span class="blur">promise.then(x => console.log(x), error => console.log(error));</span>
+    						</code></pre>
+				</section>
+
+				<section>
+					<h2>Promises (ES6)</h2>
+					     <pre><code data-trim data-noescape>
+<span class="blur">let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    <strong>reject</strong>('Promise: error');
+  }, 1000);
+});</span>
+promise.<strong>then</strong>(x => console.log(x), <strong>error => console.log(error)</strong>);
     						</code></pre>
 				</section>
 
@@ -73,45 +97,54 @@ promise.<strong>then</strong>(x => console.log(x));
 					<h2>Asynchronous data streams</h2>
 					<p class="fragment">Observables</p>
 					<p class="fragment"><a href="https://github.com/tc39/proposal-observable">https://github.com/tc39/proposal-observable</a></p>
-					
-					
 				</section>
-				<section>
-					<h2>Observables</h2>
-					     <pre class="fragment"><code data-trim data-noescape>
-import { Observable } from "rxjs/observable";
-<span class="blur">let observable = new Observable(observer => {
-   setTimeout(() => {
-    observer.next("Observable: Hello world");
-  }, 1000);
-});
-observable.subscribe(x => console.log(x));</span>
-    						</code></pre>
-				</section>
+
 
 				<section>
 					<h2>Observables</h2>
 					     <pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from "rxjs/observable";</span>
 let observable = new Observable(observer => {
    setTimeout(() => {
     observer.<strong>next</strong>("Observable: Hello world");
   }, 1000);
 });
-<span class="blur">observable.subscribe(x => console.log(x));</span>
+<span class="blur">observable.subscribe(x => console.log(x), error => console.log(error));</span>
     						</code></pre>
 				</section>
 
 				<section>
 					<h2>Observables</h2>
 					     <pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from "rxjs/observable";
-let observable = new Observable(observer => {
+<span class="blur">let observable = new Observable(observer => {
    setTimeout(() => {
     observer.next("Observable: Hello world");
   }, 1000);
 });</span>
-observable.<strong>subscribe</strong>(x => console.log(x));
+observable.<strong>subscribe</strong>(<strong>x => console.log(x)</strong>, error => console.log(error));
+    						</code></pre>
+				</section>
+
+				<section>
+					<h2>Observables</h2>
+					     <pre><code data-trim data-noescape>
+let observable = new Observable(observer => {
+   setTimeout(() => {
+    observer.<strong>error</strong>("Observable: error");
+  }, 1000);
+});
+<span class="blur">observable.subscribe(x => console.log(x), error => console.log(error));</span>
+    						</code></pre>
+				</section>
+
+				<section>
+					<h2>Observables</h2>
+					     <pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
+    observer.error("Observable: error");
+  }, 1000);
+});</span>
+observable.<strong>subscribe</strong>(x => console.log(x), <strong>error => console.log(error)</strong>);
     						</code></pre>
 				</section>
 
@@ -126,7 +159,6 @@ observable.<strong>subscribe</strong>(x => console.log(x));
 				<section>
 					<h2>Unsubscribe</h2>
 					<pre class="fragment"><code data-trim data-noescape>
-import { Observable } from "rxjs/observable";
 let observable = new Observable(observer => {
   setTimeout(() => {
     observer.next("Observable: Hello world");
@@ -146,8 +178,7 @@ let <strong>subscription</strong> = observable.subscribe(x => console.log(x));
 				<section>
 					<h2>Unsubscribe</h2>
 					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from "rxjs/observable";
-let observable = new Observable(observer => {
+<span class="blur">let observable = new Observable(observer => {
   setTimeout(() => {
     observer.next("Observable: Hello world");
   }, 1000);
@@ -206,6 +237,25 @@ observable.subscribe(x => console.log(x));</span>
 					<pre><code data-trim data-noescape>
 <span class="blur">let observable = new Observable(observer => {
    setTimeout(() => {
+    observer.next("Message 2");
+    observer.next("Message 3");  
+  }, 1000);
+
+  setTimeout(() => {
+    observer.next("Message 1");
+  }, 400);
+});
+
+observable</span>.subscribe(x => console.log(x)<span class="blur">);</span>
+    						</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Streaming</h2>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
     </span>observer.next("Message 2");<span class="blur">
     observer.next("Message 3");  
   }, 1000);
@@ -216,6 +266,25 @@ observable.subscribe(x => console.log(x));</span>
 });
 
 observable.subscribe(x => console.log(x));</span>
+    						</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Streaming</h2>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
+    observer.next("Message 2");
+    observer.next("Message 3");  
+  }, 1000);
+
+  setTimeout(() => {
+    observer.next("Message 1");
+  }, 400);
+});
+
+observable</span>.subscribe(x => console.log(x)<span class="blur">);</span>
     						</code></pre>
 
 				</section>
@@ -240,22 +309,48 @@ observable.subscribe(x => console.log(x));</span>
 				</section>
 
 				<section>
+					<h2>Streaming</h2>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+   setTimeout(() => {
+    observer.next("Message 2");
+    observer.next("Message 3");  
+  }, 1000);
+
+  setTimeout(() => {
+    observer.next("Message 1");
+  }, 400);
+});
+
+observable</span>.subscribe(x => console.log(x)<span class="blur">);</span>
+    						</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Event streams</h2>
+					<p class="fragment">Button click event</p>
+					<p class="fragment">Key down event</p>
+					<p class="fragment">Mouse move event</p>
+					<p class="fragment">...</p>
+				</section>
+
+				<section>
 					<h2>Event streams</h2>
 					<pre class="fragment"><code data-trim data-noescape>
-let createKeyUpObservable = (element) => {
+let createClickObservable = (element) => {
   return new Observable(observer => {
     let eventHandler = event => observer.next(event);
     // Listen for the event and emit the event parameter
-    element.addEventListener('keyup', eventHandler, true);
+    element.addEventListener('click', eventHandler);
     <span class="blur">// Return a function which will cancel the event stream
     return () => {
-      element.removeEventListener(keyup, eventHandler, true);
+      element.removeEventListener('click', eventHandler);
     };</span>
   };
 };
-
-<span class="blur">let input = document.querySelector(".event-input");
-let observable = createKeyUpObservable(input);
+<span class="blur">let button = document.querySelector(".event-button");
+let observable = createClickObservable(button);
 observable.subscribe(x => console.log(x));</span>
     						</code></pre>
 
@@ -264,19 +359,19 @@ observable.subscribe(x => console.log(x));</span>
 				<section>
 					<h2>Event streams</h2>
 					<pre><code data-trim data-noescape>
-let createKeyUpObservable = (element) => {
+let createClickObservable = (element) => {
   return new Observable(observer => {
     <span class="blur">let eventHandler = event => observer.next(event);
     // Listen for the event and emit the event parameter
-    element.addEventListener('keyup', eventHandler, true);</span>
+    element.addEventListener('click', eventHandler);</span>
     // Return a function which will cancel the event stream
     return () => {
-      element.removeEventListener(keyup, eventHandler, true);
+      element.removeEventListener('click', eventHandler);
     };
   };
 };
-<span class="blur">let input = document.querySelector(".event-input");
-let observable = createKeyUpObservable(input);
+<span class="blur">let button = document.querySelector(".event-button");
+let observable = createClickObservable(button);
 observable.subscribe(x => console.log(x));</span>
     						</code></pre>
 
@@ -285,19 +380,19 @@ observable.subscribe(x => console.log(x));</span>
 				<section>
 					<h2>Event streams</h2>
 					<pre><code data-trim data-noescape>
-<span class="blur">let createKeyUpObservable = (element) => {
+<span class="blur">let createClickObservable = (element) => {
   return new Observable(observer => {
     let eventHandler = event => observer.next(event);
     // Listen for the event and emit the event parameter
-    element.addEventListener('keyup', eventHandler, true);
+    element.addEventListener('click', eventHandler);
     // Return a function which will cancel the event stream
     return () => {
-      element.removeEventListener(keyup, eventHandler, true);
+      element.removeEventListener('click', eventHandler);
     };
   };
 };</span>
-let input = document.querySelector(".event-input");
-let observable = createKeyUpObservable(input);
+let button = document.querySelector(".event-button");
+let observable = createClickObservable(button);
 observable.subscribe(x => console.log(x));
     						</code></pre>
 
@@ -307,10 +402,19 @@ observable.subscribe(x => console.log(x));
 					<h2>Event streams (rxjs)</h2>
 					<pre class="fragment"><code data-trim data-noescape>
 import * as Rx from "rxjs";
-let input = document.querySelector(".event-input");
-let observable = Rx.Observable.fromEvent(input, 'keyup')
+
+let input = document.querySelector(".event-button");
+let observable = Rx.Observable.fromEvent(input, 'click')
 observable.subscribe(x => console.log(x));
     						</code></pre>
+
+				</section>
+
+				<section>
+					<h2>next, complete and error</h2>
+					<p class="fragment"><strong>next</strong>: item emission</p>
+					<p class="fragment"><strong>complete</strong>: no more item emission</p>
+					<p class="fragment"><strong>error</strong>: something went wrong, no more item emission</p>
 
 				</section>
 
@@ -321,8 +425,7 @@ let observable = new Observable(observer => {
   setTimeout(() => {
     observer.<strong>next</strong>("Message 1");
     observer.<strong>next</strong>("Message 2");
-    observer.<strong>complete</strong>(); 
-    <span class="blur">// observer.error("something went wrong");</span>
+    observer.<strong>complete</strong>();
   }, 1000);
 });
 
@@ -332,7 +435,6 @@ let observable = new Observable(observer => {
   complete: () => console.log("Completed")
 };
 
-//observable.subscribe(x => console.log(x));
 observable.subscribe(observer);</span>
     						</code></pre>
 
@@ -345,7 +447,6 @@ let observable = new Observable(observer => {
   setTimeout(() => {
     observer.next("Message 1");
     observer.next("Message 2");
-    <span class="blur">// observer.complete();</span> 
     observer.<strong>error</strong>("something went wrong");
   }, 1000);
 });
@@ -356,7 +457,6 @@ let observer = {
   complete: () => console.log("Completed")
 };
 
-//observable.subscribe(x => console.log(x));
 observable.subscribe(observer);</span>
     						</code></pre>
 
@@ -370,7 +470,6 @@ observable.subscribe(observer);</span>
     observer.next("Message 1");
     observer.next("Message 2");
     observer.complete(); 
-    // observer.error("something went wrong");
   }, 1000);
 });</span>
 
@@ -380,27 +479,63 @@ let observer = {
   <strong>complete</strong>: () => console.log("Completed")
 };
 
-//observable.subscribe(x => console.log(x));
 observable.subscribe(observer);
     						</code></pre>
 
 				</section>
 
 				<section>
-					<h2>A Promise is an Observable who emits a single item and completes</h2>
-					<p>(or fails without emitting any item)</p>
-				</section>
-				<section>
-					<h2>Hot & Cold Observables</h2>
+					<h2>Subscribe signature</h2>
+					<pre class="fragment"><code data-trim data-noescape>
+observable.subscribe({
+  <strong>next</strong>: x => console.log(x),
+  <strong>error</strong>: error => console.log(`Error: ${error}`),
+  <strong>complete</strong>: () => console.log("Completed")
+});
+
+observable.subscribe(
+  x => console.log(x), 
+  error => console.log(`Error: ${error}`), 
+  () => console.log("Completed")
+);
+    						</code></pre>
+
 				</section>
 
 				<section>
-					<h1>rxjs</h1>
+					<h2>A Promise is like an Observable who emits a single item and completes</h2>
+					<p>(or fails without emitting any item)</p>
 				</section>
+
+				<section>
+					<h2>Rxjs 5 (beta)</h2>
+					<p class="fragment">Completely rewritten </p>
+					<p class="fragment">Better performance</p>
+					<p class="fragment">Follows the ES7 spec proposal</p>
+					<p class="fragment">Written in TypeScript </p>
+				</section>
+
+				<section>
+					<h2>Browser compatibility</h2>
+					<img class="fragment" src="/imgs/rxjs-browser-compatibility.png" />
+				</section>
+
+				<section>
+					<h2>Rxjs Observable</h2>
+					
+					<pre class="fragment"><code data-trim data-noescape>
+npm install rxjs
+    						</code></pre>
+					<pre class="fragment"><code data-trim data-noescape>
+import { Observable } from "rxjs/Rx";
+    						</code></pre>
+				</section>
+					
+
 				<section>
 					<h2>Operators</h2>
 					<p class="fragment">Methods on/for the observable.</p>
-					<p class="fragment">An operator return a <strong>new</strong> observable.</p>
+					<p class="fragment">An operator returns a <strong>new</strong> observable.</p>
 				</section>
 
 				<section>
@@ -423,7 +558,7 @@ let observable = </span>Rx.Observable.create(observer => {
 					<p>Rx.Observable.interval()</p>
 					<pre class="fragment"><code data-trim data-noescape>
 <span class="blur">import * as Rx from 'rxjs';
-let observable = </span>Rx.Observable.interval(200);
+let observable = </span>Rx.Observable.interval(1000);
 
 <span class="blur">let subscription = observable
   .subscribe(x => console.log(x));</span>
@@ -447,37 +582,43 @@ let observable =</span> Rx.Observable.from([1, 2, 3]);
 				</section>
 
 				<section>
+					<h2>Static operators</h2>
+					<p>Rx.Observable.fromPromise()</p>
+					<pre class="fragment"><code data-trim data-noescape>
+<span class="blur">import { Promise } from 'es6-promise';
+import * as Rx from 'rxjs';
+
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise: Success');
+  }, 1000);
+});
+
+let observable = </span>Rx.Observable.fromPromise(promise);<span class="blur">
+let subscription = observable
+  .subscribe(x => console.log(x));</span>
+    						</code></pre>
+
+					
+				</section>
+
+				<section>
 					<h2>Instance operators</h2>
 					<p class="fragment">Methods on the Observable.prototype</p>
 				</section>
 
 				<section>
 					<h2>Instance operators</h2>
-					<p class="fragment">Debounce & debounceTime</p>
+					<p class="fragment">DebounceTime</p>
 					<p class="fragment">Emits a value from the source Observable only after a particular time span has passed without another source emission.</p>
 				</section>
 
-				<section>
-					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from 'rxjs/observable';</span>
-import 'rxjs/add/operator/debounceTime';
-<span class="blur">let observable = new Observable(observer => {
-   observer.next('Red');
-   setTimeout(() => { observer.next('Yellow'); }, 700);
-   setTimeout(() => { observer.next('Green'); }, 1000);
-   setTimeout(() => { observer.next('Blue'); }, 1600);
-});
-let subscription = observable
-  .<strong>debounceTime</strong>(500 /* ms */)
-  //.debounce(() => Rx.Observable.timer(500 /* ms */))
-  .subscribe(x => console.log(x));</span>
-    						</code></pre>
-				</section>
+			
 
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from 'rxjs/observable';
-import 'rxjs/add/operator/debounceTime';</span>
+<span class="blur">import { Observable } from 'rxjs/Rx';</span>
+
 let observable = new Observable(observer => {
    observer.next('Red');
    setTimeout(() => { observer.next('Yellow'); }, 700);
@@ -486,15 +627,14 @@ let observable = new Observable(observer => {
 });
 <span class="blur">let subscription = observable
   .<strong>debounceTime</strong>(500 /* ms */)
-  //.debounce(() => Rx.Observable.timer(500 /* ms */))
   .subscribe(x => console.log(x));</span>
     						</code></pre>
 				</section>
 
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from 'rxjs/observable';
-import 'rxjs/add/operator/debounceTime';
+<span class="blur">import { Observable } from 'rxjs/Rx';
+
 let observable = new Observable(observer => {
    observer.next('Red');
    setTimeout(() => { observer.next('Yellow'); }, 700);
@@ -503,27 +643,10 @@ let observable = new Observable(observer => {
 });</span>
 let subscription = observable
   .<strong>debounceTime</strong>(500 /* ms */)
-  <span class="blur">//.debounce(() => Rx.Observable.timer(500 /* ms */))</span>
   .subscribe(x => console.log(x));
     						</code></pre>
 				</section>
 
-				<section>
-					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from 'rxjs/observable';
-import 'rxjs/add/operator/debounceTime';
-let observable = new Observable(observer => {
-   observer.next('Red');
-   setTimeout(() => { observer.next('Yellow'); }, 700);
-   setTimeout(() => { observer.next('Green'); }, 1000);
-   setTimeout(() => { observer.next('Blue'); }, 1600);
-});</span>
-let subscription = observable
-  <span class="blur">//.debounceTime(500 /* ms */)</span>
-  .<strong>debounce</strong>(() => Rx.Observable.timer(500 /* ms */))
-  .subscribe(x => console.log(x));
-    						</code></pre>
-				</section>
 
 				
 				<section>
@@ -534,7 +657,7 @@ let subscription = observable
 
 				<section>
 					<pre><code data-trim data-noescape>
-import { Observable } from 'rxjs/observable';
+<span class="blur">import { Observable } from 'rxjs/Rx';</span>
 let observable = new Observable(observer => {
    observer.next('Message 1');
 });<span class="blur">
@@ -547,7 +670,7 @@ let subscription = observable
 
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from 'rxjs/observable';
+<span class="blur">import { Observable } from 'rxjs/Rx';
 let observable = new Observable(observer => {
    observer.next('Message 1');
 });</span>
@@ -560,7 +683,7 @@ let subscription = observable
 
 				<section>
 					<pre><code data-trim data-noescape>
-<span class="blur">import { Observable } from 'rxjs/observable';
+<span class="blur">import { Observable } from 'rxjs/Rx';
 let observable = new Observable(observer => {
    observer.next('Message 1');
 });</span>
@@ -619,6 +742,20 @@ let subscription = observable</span>
 					<h2>Instance operators</h2>
 					<p>Filters</p>
 						<pre class="fragment"><code data-trim data-noescape>
+<span class="blur">let observable = </span>Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
+<span class="blur">let subscription = observable
+  .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6
+  .skip(1) // Limits the observable to: 12, 4, 6
+  .take(2) // Limits the obervable to: 12, 4
+  .last() // Limits the observable to 4
+  .subscribe(x => console.log(x)); // Logs: 4.</span>
+    						</code></pre>
+				</section>
+
+				<section>
+					<h2>Instance operators</h2>
+					<p>Filters</p>
+						<pre><code data-trim data-noescape>
 <span class="blur">let observable = Rx.Observable.from([1, 2, 5, 1, 12, 4, 6]);
 let subscription = observable</span>
   .filter(x => x % 2 === 0) // Limits the observable to: 2, 12, 4, 6
