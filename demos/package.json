@@ -1,0 +1,44 @@
+{
+  "name": "rxjs-observables",
+  "version": "1.0.0",
+  "description": "Demo's for the rxjs talk",
+  "scripts": {
+    "postinstall": "typings install",
+
+    "promises:1": "ts-node promises/demo1.ts",
+
+    "observables:1": "ts-node observables/demo1.ts",
+    "observables:2": "ts-node observables/demo2.unsubscribe.ts",
+    "observables:3": "ts-node observables/demo3.streaming.ts",
+    "observables:4": "ts-node observables/demo4.nextcompleteerror.ts",
+    "observables:5": "ts-node observables/demo5.unsubscribe.custom.ts",
+
+    "static-operators:1": "ts-node static-operators/demo1.create.ts",
+    "static-operators:2": "ts-node static-operators/demo2.interval.ts",
+    "static-operators:3": "ts-node static-operators/demo3.from.ts",
+    "static-operators:4": "ts-node static-operators/demo4.fromPromise.ts",
+
+    "operators:1": "ts-node operators/demo1.debounce.ts",
+    "operators:2": "ts-node operators/demo2.map.ts",
+    "operators:3": "ts-node operators/demo3.distinct.ts",
+    "operators:4": "ts-node operators/demo4.distinctUntilChanged.ts",
+    "operators:5": "ts-node operators/demo5.filters.ts",
+    "operators:6": "ts-node operators/demo6.flatMap.ts",
+    "operators:7": "ts-node operators/demo7.switchmap.ts"
+  },
+  "keywords": [
+    "rxjs"
+  ],
+  "author": "Frederik Prijck",
+  "license": "ISC",
+  "dependencies": {
+    "es6-promise": "^3.2.1",
+    "rxjs": "^5.0.0-beta.11",
+    "ts-node": "^1.2.2",
+    "typings": "^1.3.2"
+  },
+  "devDependencies": {
+    "ts-node": "^1.2.2",
+    "typings": "^1.3.2"
+  }
+}
