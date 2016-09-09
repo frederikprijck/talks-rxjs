@@ -29,6 +29,8 @@ Run the slides
 npm start
 ```
 
+The presentation will be available at `http://localhost:8001`, you can change the port in `package.json` if needed.
+
 ### Demo's ###
 
 To run the demos, navigate to the `demos` directory
