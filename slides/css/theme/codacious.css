@@ -23,7 +23,7 @@
     color: #555;
 }
 
-.hljs-keyword, .hljs-selector-tag, .hljs-tag, .hljs-title, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-section, .hljs-type {
+.hljs-keyword, .hljs-selector-tag, .hljs-tag, .hljs-title, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-section, .hljs-type, .hljs-attribute {
     /*color: #2a76dd;*/
     color: #555;
 }

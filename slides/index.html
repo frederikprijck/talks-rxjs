@@ -31,9 +31,11 @@
 					<h1>Going wild and reactive</h1>
 					<p><a href="https://twitter.com/frederikprijck" target="_blank">@frederikprijck</a></p>
 					<p>Developer & Co-Founder @ <a href="http://codacio.us" target="_blank">codacious</a>.<p>
+					<p><a href="http://www.frederikprijck.net/talks/rxjs">http://www.frederikprijck.net/talks/rxjs</a></p>
 				</section>
 				<section>
 					<h1>Reactive Programming</h1>
+					
 				</section>
 				<section>
 					<h2>Asynchronous data streams</h2>
@@ -43,6 +45,11 @@
 					<h2>Asynchronous <span class="blur">data streams</span></h2>
 					<p class="fragment">Promises</p>
 				</section>
+				<section>
+					<h2>Promises (ES6)</h2>
+					<p class="fragment">A Promise represents a value which may be available now, or in the future, or never.</p>
+				</section>
+				
 				<section>
 					<h2>Promises (ES6)</h2>
 					     <pre class="fragment"><code data-trim data-noescape>
@@ -153,7 +160,7 @@ observable.<strong>subscribe</strong>(x => console.log(x), <strong>error => cons
 				</section>
 
 				<section>
-					<h2>Observables are Promises on steroids</h2>
+					<h2>But they can do more</h2>
 				</section>
 
 				<section>
@@ -334,6 +341,12 @@ observable</span>.subscribe(x => console.log(x)<span class="blur">);</span>
 					<p class="fragment">Mouse move event</p>
 					<p class="fragment">...</p>
 				</section>
+				
+				<section>
+				<h2>Event streams</h2>
+					<p class="fragment">No more html elements with event handlers in our application</p>
+					<p class="fragment">Instead we use an observable who emit's an item for each occuring event.</p>
+				</section>
 
 				<section>
 					<h2>Event streams</h2>
@@ -398,13 +411,14 @@ observable.subscribe(x => console.log(x));
 
 				</section>
 
+
 				<section>
 					<h2>Event streams (rxjs)</h2>
 					<pre class="fragment"><code data-trim data-noescape>
 import * as Rx from "rxjs";
 
-let input = document.querySelector(".event-button");
-let observable = Rx.Observable.fromEvent(input, 'click')
+let button = document.querySelector(".event-button");
+let observable = Rx.Observable.fromEvent(button, 'click')
 observable.subscribe(x => console.log(x));
     						</code></pre>
 
@@ -484,6 +498,13 @@ observable.subscribe(observer);
 
 				</section>
 
+				
+
+				<section>
+					<h2>A Promise is like an Observable who emits a single item and completes</h2>
+					<p>(or fails without emitting any item)</p>
+				</section>
+
 				<section>
 					<h2>Subscribe signature</h2>
 					<pre class="fragment"><code data-trim data-noescape>
@@ -503,21 +524,18 @@ observable.subscribe(
 				</section>
 
 				<section>
-					<h2>A Promise is like an Observable who emits a single item and completes</h2>
-					<p>(or fails without emitting any item)</p>
-				</section>
-
-				<section>
 					<h2>Rxjs 5 (beta)</h2>
 					<p class="fragment">Completely rewritten </p>
 					<p class="fragment">Better performance</p>
 					<p class="fragment">Follows the ES7 spec proposal</p>
 					<p class="fragment">Written in TypeScript </p>
+					<p class="fragment">Migration information: <a href="https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md">https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md</a></p>
 				</section>
 
 				<section>
 					<h2>Browser compatibility</h2>
-					<img class="fragment" src="/imgs/rxjs-browser-compatibility.png" />
+					<img src="./imgs/rxjs-browser-compatibility.png" />
+					<a href="https://saucelabs.com/u/rxjs5">https://saucelabs.com/u/rxjs5</a>
 				</section>
 
 				<section>
@@ -529,6 +547,7 @@ npm install rxjs
 					<pre class="fragment"><code data-trim data-noescape>
 import { Observable } from "rxjs/Rx";
     						</code></pre>
+						<p class="fragment">Add this to all previous samples to make them work.</p>
 				</section>
 					
 
@@ -627,9 +646,11 @@ let observable = new Observable(observer => {
 });
 <span class="blur">let subscription = observable
   .<strong>debounceTime</strong>(500 /* ms */)
-  .subscribe(x => console.log(x));</span>
+  .subscribe(x => console.log(x)); // Logs: Red, Green, Blue</span>
     						</code></pre>
 				</section>
+
+				
 
 				<section>
 					<pre><code data-trim data-noescape>
@@ -643,17 +664,17 @@ let observable = new Observable(observer => {
 });</span>
 let subscription = observable
   .<strong>debounceTime</strong>(500 /* ms */)
-  .subscribe(x => console.log(x));
+  .subscribe(x => console.log(x)); // Logs: Red, Green, Blue
     						</code></pre>
 				</section>
-
-
 				
 				<section>
 					<h2>Instance operators</h2>
 					<p>Map</p>
 					<p class="fragment">Transform the items emitted by an Observable by applying a function to each item.</p>				
 				</section>
+
+					
 
 				<section>
 					<pre><code data-trim data-noescape>
@@ -692,6 +713,76 @@ let subscription = observable
   .subscribe(x => console.log(x.<strong>message</strong>));
     						</code></pre>
 					
+				</section>
+
+				<section>
+					<h2>Instance operators</h2>
+					<p>FlatMap</p>
+					<p class="fragment">Transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable</p>
+				</section>
+
+				<section>
+					<pre><code data-trim data-noescape>
+import { Observable } from 'rxjs/Rx';
+let observable = new Observable(observer => {
+   observer.next('Message 1');
+});
+let subscription = observable
+  .map(x => doWork(x))
+  .subscribe(x => console.log(x)); // Logs: Response for Message 1
+
+let doWork = (value) => {
+  return `Response for ${value}`;
+};
+    						</code></pre>
+					
+				</section>
+
+
+				<section>
+					<pre><code data-trim data-noescape>
+import { Observable } from 'rxjs/Rx';
+let observable = new Observable(observer => {
+   observer.next('Message 1');
+});
+let subscription = observable
+  .map(x => doAsyncWork(x))
+  .subscribe(x => console.log(x)); // Logs: Observable
+
+let doAsyncWork = (value) => {
+  return new Observable(resolve => {
+    resolve.next(`Response for ${value}`);
+    resolve.complete();
+  });
+};
+    						</code></pre>
+					
+				</section>
+
+
+				<section>
+					<pre><code data-trim data-noescape>
+import { Observable } from 'rxjs/Rx';
+let observable = new Observable(observer => {
+   observer.next('Message 1');
+});
+let subscription = observable
+  .<strong>flatMap</strong>(x => doAsyncWork(x))
+  .subscribe(x => console.log(x)); // Logs: Response for Message 1
+
+let doAsyncWork = (value) => {
+  return new Observable(resolve => {
+    resolve.next(`Response for ${value}`);
+    resolve.complete();
+  });
+};
+    						</code></pre>
+					
+				</section>
+				
+				<section>
+					<h2>Instance operators</h2>
+					<p>SwitchMap</p>
 				</section>
 
 				<section>
@@ -822,10 +913,11 @@ let subscription = observable
     						</code></pre>
 				</section>
 
+			
+
 				<section>
 					<h2>Operators</h2>
 					<p><a href="https://github.com/ReactiveX/rxjs/blob/master/doc/operators.md" target="_blank">https://github.com/ReactiveX/rxjs/blob/master/doc/operators.md</a></p>
-					<p><a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/which-static.md" target="_blank">https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/which-static.md</a></p>
 				</section>
 
 				<section>
