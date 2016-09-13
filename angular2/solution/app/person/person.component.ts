@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Person } from './person-model';
 import { PersonService } from './person.service';
 import { OrderByPipeline, OrderByComponent, OrderByHeadComponent, OrderBy } from '../shared';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
     selector: 'persons',
@@ -18,11 +19,15 @@ export class PersonComponent {
     orderByTarget: OrderBy;
     orderByFilter = '+';
 
+    search$ = new Subject<string>();
+
     constructor(private _router: Router, private _personService: PersonService) { }
 
     ngOnInit() {
         this.getPersons();
         this.orderByFilter = '+';
+
+        this.search$.subscribe(result => this.onSearch(result));
     }
 
     UpdateSort(orderBy: OrderBy) {
