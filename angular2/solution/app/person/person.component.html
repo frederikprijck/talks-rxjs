@@ -9,7 +9,7 @@
             <th order-by [target]="'phoneNumber'">Phone number</th>
         </thead>
         <tbody *ngIf="persons">
-            <tr *ngFor="let person of persons | orderBy : orderByFilter">
+            <tr *ngFor="let person of persons | async | orderBy : orderByFilter">
                 <td>{{ person.firstName }}</td>
                 <td>{{ person.lastName }}</td>
                 <td>{{ person.email }}</td>

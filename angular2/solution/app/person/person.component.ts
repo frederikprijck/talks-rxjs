@@ -14,7 +14,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 })
 export class PersonComponent {
     error: any;
-    persons: Person[];
+    persons: Observable<Person[]>;
     selectedPerson: Person;
     orderByTarget: OrderBy;
     orderByFilter = '+';
@@ -26,13 +26,12 @@ export class PersonComponent {
     ngOnInit() {
         this.orderByFilter = '+';
 
-        this.search$
+        this.persons = this.search$
             .startWith('')
             .debounceTime(1000)
             .map(value => value.trim())
             .distinctUntilChanged()
-            .switchMap(x => this._personService.search(x))
-            .subscribe(persons => this.persons = persons, error => this.error = error);
+            .switchMap(x => this._personService.search(x));
     }
 
     UpdateSort(orderBy: OrderBy) {
@@ -54,7 +53,7 @@ export class PersonComponent {
         this._personService
             .delete(person)
             .then(res => {
-                this.persons = this.persons.filter(h => h !== person);
+                this.persons = this.persons.map(x=>x.filter(h => h !== person));
                 if (this.selectedPerson === person) { this.selectedPerson = null; }
             })
             .catch(error => this.error = error);
