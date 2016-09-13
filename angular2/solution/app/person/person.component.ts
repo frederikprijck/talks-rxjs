@@ -31,7 +31,8 @@ export class PersonComponent {
             .debounceTime(1000)
             .map(value => value.trim())
             .distinctUntilChanged()
-            .subscribe(result => this.onSearch(result));
+            .switchMap(x => this._personService.search(x))
+            .subscribe(persons => this.persons = persons, error => this.error = error);
     }
 
     UpdateSort(orderBy: OrderBy) {
@@ -46,11 +47,6 @@ export class PersonComponent {
 
     onCreate(){
         this._router.navigate(['/person/create']);
-    }
-
-    onSearch(value) {
-        this._personService.search(value)
-            .subscribe(persons => this.persons = persons, error => this.error = error);
     }
 
     getPersons() {
