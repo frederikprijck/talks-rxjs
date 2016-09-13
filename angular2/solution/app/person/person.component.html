@@ -1,0 +1,27 @@
+<search mode="click" (search)="onSearch($event.value)"></search>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead order-by (UpdateSort)="UpdateSort($event)">
+            <th order-by [target]="'firstName'">First name</th>
+            <th order-by [target]="'lastName'">Last name</th>
+            <th order-by [target]="'email'">Email</th>
+            <th order-by [target]="'phoneNumber'">Phone number</th>
+        </thead>
+        <tbody *ngIf="persons">
+            <tr *ngFor="let person of persons | orderBy : orderByFilter">
+                <td>{{ person.firstName }}</td>
+                <td>{{ person.lastName }}</td>
+                <td>{{ person.email }}</td>
+                <td>
+                    {{ person.phoneNumber }}
+
+                    <button class="btn btn-danger btn-xs pull-right" (click)="delete(person, $event)"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button class="btn btn-success btn-xs pull-right" (click)="edit(person, $event)" style="margin-right:5px;"><i class="glyphicon glyphicon-pencil"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-default" (click)="onCreate()">Create</button>
+</div>

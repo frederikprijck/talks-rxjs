@@ -1,0 +1,20 @@
+.navbar {
+  min-height: 75px;
+}
+
+.navbar-brand {
+    float: left;
+    height: 75px;
+    padding: 25px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.nav.navbar-nav{
+  float: right;
+}
+
+.jumbotron {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}

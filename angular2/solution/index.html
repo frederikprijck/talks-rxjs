@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <base href="/">
+    <title>Open Windows Insiders Community</title>
+    <meta charset="UTF-8">
+    
+<link rel="icon" type="image/ico" href="images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="OWIC is a Windows Insiders Community that focuses on the development of cross platform applications using open-source web technologies."/>
+    <meta name="keywords" content="Angular, Community, Open-source, Windows Insiders, Cross Platforn Applications, Mobile Applications" />
+
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- GOOGLE FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- FONT ICONS -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- 1. Load libraries -->
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+    System.import('app').catch(function(err){ 
+          console.error(err);
+    });
+    </script>
+
+</head>
+<!-- 3. Display the application -->
+
+<body>
+
+    <owic-app>Loading...</owic-app>
+
+</body>
+
+</html>
