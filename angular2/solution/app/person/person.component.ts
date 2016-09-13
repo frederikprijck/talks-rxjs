@@ -27,11 +27,11 @@ export class PersonComponent {
         this.orderByFilter = '+';
 
         this.search$
+            .startWith('')
             .debounceTime(1000)
             .map(value => value.trim())
             .distinctUntilChanged()
             .switchMap(x => this._personService.search(x))
-            .merge(this._personService.search(''))
             .subscribe(persons => this.persons = persons, error => this.error = error);
     }
 
