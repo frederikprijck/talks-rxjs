@@ -20,21 +20,19 @@ export class PersonService {
     // }
 
     // Get all persons from mocked service in-memory-db
-    getPersons(): Promise<Person[]> {
+    getPersons(): Observable<Person[]> {
         return this._http.get(this.personsApi)
-            .toPromise()
-            .then(response => response.json().data.map(x => this.mapJson(x)))
-            .catch(this.handleError);
+            .map(response => response.json().data.map(x => this.mapJson(x)));
     }
 
     search(value: string): Observable<Person[]> {
-        return this._http.get(`${this.personsApi}?firstName=${value}+`)
+        return !value ? this.getPersons() : this._http.get(`${this.personsApi}?firstName=${value}+`)
             .map(response => response.json().data.map(x => this.mapJson(x)));
     }
 
     getPerson(id: string) {
         return this.getPersons()
-            .then(persons => persons.find(person => person.id === id));
+            .map(persons => persons.find(person => person.id === id));
     }
 
     save(person: Person): Promise<Person> {

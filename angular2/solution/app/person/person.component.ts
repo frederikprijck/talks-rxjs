@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Person } from './person-model';
 import { PersonService } from './person.service';
 import { OrderByPipeline, OrderByComponent, OrderByHeadComponent, OrderBy } from '../shared';
-import { Subject } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 @Component({
     selector: 'persons',
@@ -24,7 +24,6 @@ export class PersonComponent {
     constructor(private _router: Router, private _personService: PersonService) { }
 
     ngOnInit() {
-        this.getPersons();
         this.orderByFilter = '+';
 
         this.search$
@@ -32,6 +31,7 @@ export class PersonComponent {
             .map(value => value.trim())
             .distinctUntilChanged()
             .switchMap(x => this._personService.search(x))
+            .merge(this._personService.search(''))
             .subscribe(persons => this.persons = persons, error => this.error = error);
     }
 
@@ -47,12 +47,6 @@ export class PersonComponent {
 
     onCreate(){
         this._router.navigate(['/person/create']);
-    }
-
-    getPersons() {
-        this._personService.getPersons()
-            .then(persons => this.persons = persons)
-            .catch(error => this.error = error);
     }
 
     delete(person: Person, event: any) {
