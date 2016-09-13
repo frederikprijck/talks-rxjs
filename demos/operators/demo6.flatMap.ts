@@ -3,7 +3,6 @@
 **/
 
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 
 let observable = new Observable<string>(observer => {
    observer.next("j");
@@ -18,8 +17,7 @@ let observable = new Observable<string>(observer => {
 });
 
 let subscription = observable
-  //.map(x => { return search(x)})
-  .flatMap(x => { return search(x)})
+  .flatMap(x => { return search(x)}) // To fix the out of order issue => replace flatMap by switchMap
   .subscribe(x => console.log(x));
 
 

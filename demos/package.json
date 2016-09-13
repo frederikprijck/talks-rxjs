@@ -24,7 +24,11 @@
     "operators:4": "ts-node operators/demo4.distinctUntilChanged.ts",
     "operators:5": "ts-node operators/demo5.filters.ts",
     "operators:6": "ts-node operators/demo6.flatMap.ts",
-    "operators:7": "ts-node operators/demo7.switchmap.ts"
+    "operators:7": "ts-node operators/demo7.switchmap.ts",
+    "operators:8": "ts-node operators/demo8.share.ts",
+    "operators:9": "ts-node operators/demo9.merge.ts",
+
+    "subjects:1": "ts-node subjects/demo1.subject.ts"
   },
   "keywords": [
     "rxjs"
