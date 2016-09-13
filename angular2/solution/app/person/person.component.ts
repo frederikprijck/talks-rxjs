@@ -27,7 +27,11 @@ export class PersonComponent {
         this.getPersons();
         this.orderByFilter = '+';
 
-        this.search$.subscribe(result => this.onSearch(result));
+        this.search$
+            .debounceTime(1000)
+            .map(value => value.trim())
+            .distinctUntilChanged()
+            .subscribe(result => this.onSearch(result));
     }
 
     UpdateSort(orderBy: OrderBy) {
