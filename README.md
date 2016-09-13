@@ -77,5 +77,21 @@ npm run operators:6
 npm run operators:7
 ```
 
+### Angular2 sample ###
 
+To run the Angular2 sample, navigate to the `angular2\src` or `angular2\solution` directory
+
+```
+cd angular2\src or cd angular2\solution
+```
+
+Install the dependencies
+```
+npm install
+```
+
+Run it
+```
+npm start
+```
 
