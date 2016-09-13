@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Person } from './person-model';
 import { PERSONS } from './mock-persons';
 import { Http, Response, Headers } from '@angular/http';
-
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -27,11 +27,9 @@ export class PersonService {
             .catch(this.handleError);
     }
 
-    search(value: string): Promise<Person[]> {
+    search(value: string): Observable<Person[]> {
         return this._http.get(`${this.personsApi}?firstName=${value}+`)
-            .toPromise()
-            .then(response => response.json().data.map(x => this.mapJson(x)))
-            .catch(this.handleError);
+            .map(response => response.json().data.map(x => this.mapJson(x)));
     }
 
     getPerson(id: string) {

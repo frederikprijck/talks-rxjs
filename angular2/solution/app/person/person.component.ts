@@ -41,8 +41,7 @@ export class PersonComponent {
 
     onSearch(value) {
         this._personService.search(value)
-            .then(persons => this.persons = persons)
-            .catch(error => this.error = error);
+            .subscribe(persons => this.persons = persons, error => this.error = error);
     }
 
     getPersons() {
