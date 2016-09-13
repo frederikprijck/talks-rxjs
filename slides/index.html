@@ -12,8 +12,8 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		
 		<link rel="stylesheet" href="css/theme/codacious.css">
+		
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -27,6 +27,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+
 				<section>
 					<h1>Going wild and reactive</h1>
 					<p><a href="https://twitter.com/frederikprijck" target="_blank">@frederikprijck</a></p>
@@ -41,7 +42,6 @@
 				</section>
 				<section>
 					<h1>Reactive Programming</h1>
-					
 				</section>
 				<section>
 					<h2>Asynchronous data streams</h2>
@@ -55,7 +55,6 @@
 					<h2>Promises (ES6)</h2>
 					<p class="fragment">A Promise represents a value which may be available now, or in the future, or never.</p>
 				</section>
-				
 				<section>
 					<h2>Promises (ES6)</h2>
 					     <pre class="fragment"><code data-trim data-noescape>
@@ -67,7 +66,6 @@ let promise = new Promise((resolve, reject) => {
 <span class="blur">promise.then(x => console.log(x), error => console.log(error));</span>
     						</code></pre>
 				</section>
-
 				<section>
 					<h2>Promises (ES6)</h2>
 					     <pre><code data-trim data-noescape>
@@ -110,6 +108,7 @@ promise.<strong>then</strong>(x => console.log(x), <strong>error => console.log(
 					<h2>Asynchronous data streams</h2>
 					<p class="fragment">Observables</p>
 					<p class="fragment"><a href="https://github.com/tc39/proposal-observable">https://github.com/tc39/proposal-observable</a></p>
+					<p class="fragment">The Ecma TC39 committee is responsible for evolving the ECMAScript programming language.</p>
 				</section>
 
 
@@ -535,6 +534,7 @@ observable.subscribe(
 					<p class="fragment">Better performance</p>
 					<p class="fragment">Follows the ES7 spec proposal</p>
 					<p class="fragment">Written in TypeScript </p>
+					<p class="fragment">Developed as a co-opp between <strong>Netflix</strong>, <strong>Microsoft</strong> and <strong>Google</strong>.</p>
 					<p class="fragment">Migration information: <a href="https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md">https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md</a></p>
 				</section>
 
@@ -631,6 +631,52 @@ let subscription = observable
 					<h2>Instance operators</h2>
 					<p class="fragment">Methods on the Observable.prototype</p>
 				</section>
+
+				<section>
+					<h2>Instance operators</h2>
+					<p>Merge</p>
+					<p class="fragment">Combine multiple Observables into one by merging their emissions</p>				
+				</section>
+
+				<section>
+					<pre><code data-trim data-noescape>
+let observable = new Observable(observer => {
+  setTimeout(() => { 
+   observer.next('Message 1');
+   }, 1000);
+});
+
+let anotherObservable = new Observable(observer => {
+  setTimeout(() => { 
+   observer.next('Message 1');
+   }, 2000);
+});
+
+observable.subscribe(x => console.log(x));
+anotherObservable.subscribe(x => console.log(x));
+    						</code></pre>
+				</section>
+
+				<section>
+					<pre><code data-trim data-noescape>
+<span class="blur">let observable = new Observable(observer => {
+  setTimeout(() => { 
+   observer.next('Message 1');
+   }, 1000);
+});
+
+let anotherObservable = new Observable(observer => {
+  setTimeout(() => { 
+   observer.next('Message 2');
+   }, 2000);
+});</span>
+
+observable
+    .<strong>merge</strong>(anotherObservable)
+    .subscribe(x => console.log(x));
+    						</code></pre>
+				</section>
+
 
 				<section>
 					<h2>Instance operators</h2>
@@ -919,11 +965,27 @@ let subscription = observable
     						</code></pre>
 				</section>
 
-			
+				
 
 				<section>
 					<h2>Operators</h2>
 					<p><a href="https://github.com/ReactiveX/rxjs/blob/master/doc/operators.md" target="_blank">https://github.com/ReactiveX/rxjs/blob/master/doc/operators.md</a></p>
+				</section>
+
+				<section>
+					<h2>Subject</h2>
+					<p class="fragment">A Subject is both an observer and an observable.</p>
+					<p class="fragment">It emits an item when it's own <strong>next()</strong> method is called</p>
+					<p class="fragment">It can be used as a proxy</p>
+				</section>
+
+				<section>
+						<pre><code data-trim data-noescape>
+let subject = new Subject();
+
+subject.<strong>subscribe</strong>(x => console.log(x));
+subject.<strong>next</strong>('Subject: Hello world');
+    						</code></pre>
 				</section>
 
 				<section>
@@ -946,6 +1008,7 @@ let subscription = observable
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
+				width: 1000,
 				history: true,
 				transition: 'none',
 				// More info https://github.com/hakimel/reveal.js#dependencies
