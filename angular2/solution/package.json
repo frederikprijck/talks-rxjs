@@ -6,7 +6,16 @@
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "typings": "typings"
+    "typings": "typings",
+
+    
+    "step:1": "git show 78d1b07bf5aa91bec59d4a1382ff43a50eac81e6",
+    "step:2": "git show 7fcdb9cd0fa083f195b2df4b57615a3514402d79",
+    "step:3": "git show b8e864f0907341f5b45fec657f8c76abbd77e89a",
+    "step:4": "git show 3b66a8e86ec2652235e53349752e91153089be81",
+    "step:5": "git show 76f43cc4f210d162b55471e299387c274fffeb72",
+    "step:6": "git show e71a75259e06397bb8fab0d16c4ae21c32589e1a",
+    "step:7": "git show 1beb6a2728e1069058ff66c4e97e5b6078ed4841"
   },
   "license": "ISC",
   "dependencies": {
