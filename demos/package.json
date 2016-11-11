@@ -27,6 +27,7 @@
     "operators:7": "ts-node operators/demo7.switchmap.ts",
     "operators:8": "ts-node operators/demo8.share.ts",
     "operators:9": "ts-node operators/demo9.merge.ts",
+    "operators:10": "ts-node operators/demo10.catch.ts",
 
     "subjects:1": "ts-node subjects/demo1.subject.ts"
   },
