@@ -2,7 +2,7 @@
  * Demo: Custom unsubscribe
 **/
 
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 
 let observable = new Observable(observer => {
     let number = 0;
